@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <hr>
 
 <form name="myForm" style="border:1px solid #ccc" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-enctype="multipart/form-data">
+enctype="multipart/form-data" onsubmit="validate()">
 
 <div class="container">  
 
