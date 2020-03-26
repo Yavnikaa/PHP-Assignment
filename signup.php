@@ -4,7 +4,7 @@
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel='stylesheet' type='text/css' media='screen' href='stylex.css'>
-<script href='validate.js'> </script>
+<script src='validate.js'> </script>
 </head>
 
 <body>
