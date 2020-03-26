@@ -56,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = htmlspecialchars($data);
         return $data;
       }
+    
+    header('Location: profile.php');
 ?>
 
 <h1> Sign Up</h1>
