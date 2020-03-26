@@ -11,6 +11,8 @@
 <?php
 $name_err=$gender_err=$email_err=$phone_err="";
 $name=$email=$phone=$gender="";
+    
+header('Location: profile.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["name"])) {
@@ -57,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $data;
       }
     
-    header('Location: profile.php');
+    
 ?>
 
 <h1> Sign Up</h1>
