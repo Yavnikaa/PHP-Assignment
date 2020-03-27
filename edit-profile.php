@@ -16,7 +16,9 @@ include 'config.php';
  <title><?php echo $user_data['username'] ?>'s Profile Settings</title>
     </head> 
  <body>         Back to <a href="profile.php?user=<?php echo $user_data['username'] ?>"><?php echo $user_data['username'] ?></a>'s Profile        
- <h3>Update Profile Information</h3> 
+<a href="welcome.php"> Welcome to Vibechat!</a>
+	 
+	 <h3>Update Profile Information</h3> 
         <form method="post" action="update-profile-action.php?user=<?php echo $user_data['username'] ?>">           
          <label>Name:</label><br> 
           <input type="text" name="name" value="<?php echo $user_data['full_name'] ?>" /><br> 
