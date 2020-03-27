@@ -4,20 +4,19 @@
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel='stylesheet' type='text/css' media='screen' href='stylex.css'>
-<script src='validate.js'> </script>
+<script href='validate.js'> </script>
 </head>
 
 <body>
 <?php
 $name_err=$gender_err=$email_err=$phone_err="";
-$name=$email=$phone=$gender="";
-    
+$name=$email=$phone=$gender=$username=$password="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["name"])) {
+    if (empty($_POST["fullname"])) {
       $name_err = "Name is required";
     } else {
-      $name = test_input($_POST["name"]);
+      $name = test_input($_POST["fullname"]);
       
       if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
         $name_err = "Only letters and white space allowed";
@@ -57,8 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = htmlspecialchars($data);
         return $data;
       }
-    
-    
 ?>
 
 <h1> Sign Up</h1>
@@ -68,11 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <hr>
 
 <form name="myForm" style="border:1px solid #ccc" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-enctype="multipart/form-data" onsubmit="validate()">
+enctype="multipart/form-data">
 
 <div class="container">  
 
-  Name: <input type="text" name="name" placeholder="Enter your name" value="<?php echo $name;?>" required>
+  Name: <input type="text" name="fullname" placeholder="Enter your name" value="<?php echo $name;?>" required>
   <span class="error">* <?php echo $name_err;?></span>
   <br><br>
   E-mail: <input type="text" id="mail" name="email" placeholder="Enter your email-id" value="<?php echo $email;?>" required>
@@ -87,12 +84,12 @@ enctype="multipart/form-data" onsubmit="validate()">
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
   <span class="error">* <?php echo $gender_err;?></span>
   <br><br>
-  Username:<input type="text" id="txt_username" name="username" placeholder="Choose a username" >
+  Username:<input type="text" id="txt_username" name="username" placeholder="Choose a username" value="<?php echo $username;?>" >
   <div id="uname_response" ></div>
   <br><br>
   Password:<input type="password" id="psw" 
         title="Must contain at least one number and one uppercase and lowercase letter,
-         and at least 8 or more characters" placeholder="Enter password" name="password" required>
+         and at least 8 or more characters" placeholder="Enter password" name="userpassword" value="<?php echo $password;?>" required>
          <div id="message">
     <h3>Password must contain the following:</h3>
     <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
@@ -116,10 +113,34 @@ enctype="multipart/form-data" onsubmit="validate()">
   </div>
 
   </form>
-    
-<?php
-   include "redirect.php"
- ?>
+
+  <?php
+  include "config.php";
+
+  $name=mysqli_real_escape_string($con, $_REQUEST['fullname']);
+  $email=mysqli_real_escape_string($con, $_REQUEST['email']);
+  $phone=mysqli_real_escape_string($con, $_REQUEST['phone']);
+  $gender=mysqli_real_escape_string($con, $_REQUEST['gender']);
+  $username=mysqli_real_escape_string($con, $_REQUEST['username']);
+  $password=mysqli_real_escape_string($con, md5($_REQUEST['userpassword']));
+
+  $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ('$name', '$email', '$phone', '$gender', '$username')";
+if(mysqli_query($con, $sql)){
+    echo "Records added successfully.";
+} else{
+    echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+}
+ 
+  $sql2 = "INSERT INTO yav_users (username,userpassword) VALUES ('$username','$password')";
+  if(mysqli_query($con, $sql2)){
+      echo "Records added successfully.";
+  } else{
+      echo "ERROR: Could not able to execute $sql2. " . mysqli_error($con);
+  }
+  
+mysqli_close($con);
+?>
+  
 
 <?php
 echo "<h2>Your Input:</h2>";
