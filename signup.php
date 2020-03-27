@@ -113,6 +113,8 @@ enctype="multipart/form-data">
   </div>
 
   </form>
+    
+   <?php include "redirect.php" ?>
 
   <?php
   include "config.php";
@@ -140,7 +142,8 @@ if(mysqli_query($con, $sql)){
   
 mysqli_close($con);
 ?>
-  
+ 
+    
 
 <?php
 echo "<h2>Your Input:</h2>";
