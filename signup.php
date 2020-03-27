@@ -125,20 +125,20 @@ enctype="multipart/form-data" onsubmit="validate()">
   $username=mysqli_real_escape_string($con, $_REQUEST["username"]);
   $password=mysqli_real_escape_string($con, md5($_REQUEST["userpassword"]));
 
-  $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ("$name", "$email", "$phone", "$gender", "$username")";
+   $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ($name, $email, $phone, $gender,$username)";
 if(mysqli_query($con, $sql)){
     echo "Records added successfully.";
 } else{
-    echo "ERROR: Unable to execute $sql. " . mysqli_error($con);
+    echo "ERROR: Unable to execute".  $sql ." ". mysqli_error($con);
 }
- 
-  $sql2 = "INSERT INTO yav_users (username,userpassword) VALUES ("$username","$password")";
+
+  $sql2 = "INSERT INTO yav_users (username,userpassword) VALUES($username,$password)";
   if(mysqli_query($con, $sql2)){
       echo "Records added successfully.";
   } else{
-      echo "ERROR: Unable to execute $sql2. " . mysqli_error($con);
+      echo "ERROR: Unable to execute". $sql2 ." ". mysqli_error($con);
   }
-  
+
 mysqli_close($con);
 ?>
  
