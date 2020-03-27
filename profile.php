@@ -27,6 +27,8 @@ if ($get_user->num_rows == 1)
 { ?>            <a href="edit-profile.php?user=<?php echo $profile_data['username'] ?>">Edit Profile</a>            <?php
 }
         ?>  </h3>  
+    
+        <a href="welcome.php"> Welcome to Vibechat!</a>
 
         <table>
                     <tr>                
