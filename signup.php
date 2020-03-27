@@ -4,7 +4,7 @@
 <head>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <link rel='stylesheet' type='text/css' media='screen' href='stylex.css'>
-<script href='validate.js'> </script>
+<script src='validate.js'> </script>
 </head>
 
 <body>
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <hr>
 
 <form name="myForm" style="border:1px solid #ccc" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"
-enctype="multipart/form-data">
+enctype="multipart/form-data" onsubmit="validate()">
 
 <div class="container">  
 
