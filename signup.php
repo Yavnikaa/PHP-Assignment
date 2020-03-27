@@ -121,7 +121,6 @@ enctype="multipart/form-data" onsubmit="validate()">
 
   $name=mysqli_real_escape_string($con, $_REQUEST['fullname']);
   $email=mysqli_real_escape_string($con, $_REQUEST['email']);
-  $phone=mysqli_real_escape_string($con, $_REQUEST['phone']);
   $gender=mysqli_real_escape_string($con, $_REQUEST['gender']);
   $username=mysqli_real_escape_string($con, $_REQUEST['username']);
   $password=mysqli_real_escape_string($con, md5($_REQUEST['userpassword']));
@@ -130,14 +129,14 @@ enctype="multipart/form-data" onsubmit="validate()">
 if(mysqli_query($con, $sql)){
     echo "Records added successfully.";
 } else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+    echo "ERROR: Unable to execute $sql. " . mysqli_error($con);
 }
  
   $sql2 = "INSERT INTO yav_users (username,userpassword) VALUES ('$username','$password')";
   if(mysqli_query($con, $sql2)){
       echo "Records added successfully.";
   } else{
-      echo "ERROR: Could not able to execute $sql2. " . mysqli_error($con);
+      echo "ERROR: Unable to execute $sql2. " . mysqli_error($con);
   }
   
 mysqli_close($con);
