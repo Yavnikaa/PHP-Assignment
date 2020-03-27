@@ -119,20 +119,20 @@ enctype="multipart/form-data" onsubmit="validate()">
   <?php
   include "config.php";
 
-  $name=mysqli_real_escape_string($con, $_REQUEST['fullname']);
-  $email=mysqli_real_escape_string($con, $_REQUEST['email']);
-  $gender=mysqli_real_escape_string($con, $_REQUEST['gender']);
-  $username=mysqli_real_escape_string($con, $_REQUEST['username']);
-  $password=mysqli_real_escape_string($con, md5($_REQUEST['userpassword']));
+  $name=mysqli_real_escape_string($con, $_REQUEST["fullname"]);
+  $email=mysqli_real_escape_string($con, $_REQUEST["email"]);
+  $gender=mysqli_real_escape_string($con, $_REQUEST["gender"]);
+  $username=mysqli_real_escape_string($con, $_REQUEST["username"]);
+  $password=mysqli_real_escape_string($con, md5($_REQUEST["userpassword"]));
 
-  $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ('$name', '$email', '$phone', '$gender', '$username')";
+  $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ("$name", "$email", "$phone", "$gender", "$username")";
 if(mysqli_query($con, $sql)){
     echo "Records added successfully.";
 } else{
     echo "ERROR: Unable to execute $sql. " . mysqli_error($con);
 }
  
-  $sql2 = "INSERT INTO yav_users (username,userpassword) VALUES ('$username','$password')";
+  $sql2 = "INSERT INTO yav_users (username,userpassword) VALUES ("$username","$password")";
   if(mysqli_query($con, $sql2)){
       echo "Records added successfully.";
   } else{
