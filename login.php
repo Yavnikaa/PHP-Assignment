@@ -5,9 +5,9 @@ if(isset($_POST["login"]))
 {
 
 $username=$_POST['username'];
-$password=md5($_POST['password']); 
+$password=md5($_POST['userpassword']); 
 $sql = "Select * from yav_users where username ='$username' and userpassword ='$password'";
-	$result = mysqli_query($conn,$sql);
+	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_array($result);
 	if($row) {
 			$_SESSION["userid"]= $row["user_id"];
@@ -16,7 +16,7 @@ $sql = "Select * from yav_users where username ='$username' and userpassword ='$
 
 setcookie ("user_login",$_POST["username"],time()+ (10 * 365 * 24 * 60 * 60));
 
-setcookie ("userpassword",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+setcookie ("userpassword",$_POST["userpassword"],time()+ (10 * 365 * 24 * 60 * 60));
 } else {
 if(isset($_COOKIE["user_login"])) {
 setcookie ("user_login","");
