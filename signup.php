@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $phone=test_input($_POST["phone"]);
 
-        if (!preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{4}$/",$phone)) {
+        if (!preg_match("/^[0-9]{3}-[0-9]{4}-[0-9]{3}$/",$phone)) {
             $phone_err="Invalid phone number";
         }
      }
