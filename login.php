@@ -10,7 +10,7 @@ $sql = "Select * from yav_users where username ='$username' and userpassword ='$
 	$result = mysqli_query($con,$sql);
 	$row = mysqli_fetch_array($result);
 	if($row) {
-			$_SESSION["userid"]= $row["user_id"];
+			$_SESSION["user_name"]= $row["username"];
 	
 			if(!empty($_POST["remember"])) {
 
