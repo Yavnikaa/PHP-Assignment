@@ -118,6 +118,8 @@ enctype="multipart/form-data" onsubmit="validate()">
 
   <?php
   include "config.php";
+    
+  if(isset($_POST['submit'])){
 
   $name=mysqli_real_escape_string($con, $_REQUEST["fullname"]);
   $email=mysqli_real_escape_string($con, $_REQUEST["email"]);
@@ -138,6 +140,8 @@ if(mysqli_query($con, $sql)){
       echo "Records added successfully.";
   } else{
       echo "ERROR: Unable to execute". $sql2 ." ". mysqli_error($con);
+  }
+      
   }
 
 mysqli_close($con);
