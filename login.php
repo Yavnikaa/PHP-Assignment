@@ -24,7 +24,7 @@ if(isset($_COOKIE["userpassword"])) {
 setcookie ("userpassword","");
 				}
 			}
-	header('location:welcome.php');
+	header("Location:welcome.php");
 	} else {
 		$message = "Invalid Login";
 	}
