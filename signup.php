@@ -122,10 +122,11 @@ enctype="multipart/form-data" onsubmit="validate()">
   $name=mysqli_real_escape_string($con, $_REQUEST["fullname"]);
   $email=mysqli_real_escape_string($con, $_REQUEST["email"]);
   $gender=mysqli_real_escape_string($con, $_REQUEST["gender"]);
+  $phone=mysqli_real_escape_string($con, $_REQUEST["phone"]);
   $username=mysqli_real_escape_string($con, $_REQUEST["username"]);
   $password=mysqli_real_escape_string($con, md5($_REQUEST["userpassword"]));
 
-   $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ('$name' ,'$email', $phone ,'$gender','$username')";
+   $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ('$name' ,'$email', '$phone','$gender','$username')";
 if(mysqli_query($con, $sql)){
     echo "Records added successfully.";
 } else{
