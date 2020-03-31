@@ -113,13 +113,17 @@ enctype="multipart/form-data" onsubmit="validate()">
   </div>
 
   </form>
-    
-   <?php include "redirect.php" ?>
-
-  <?php
+  
+    <?php
   include "config.php";
-    
-  if(isset($_POST['submit'])){
+
+    if(isset($_POST['submit']))
+    {
+  if(empty($_POST["email"])||empty($_POST["gender"])||empty($_POST["phone"])||empty($_POST["username"])||empty($_POST["fullname"])||empty($_POST["userpassword"])||empty($_POST["password-repeat"]))
+  echo "<script>alert('Some input missing!!')</script>";
+ else
+ {
+
 
   $name=mysqli_real_escape_string($con, $_REQUEST["fullname"]);
   $email=mysqli_real_escape_string($con, $_REQUEST["email"]);
@@ -128,26 +132,57 @@ enctype="multipart/form-data" onsubmit="validate()">
   $username=mysqli_real_escape_string($con, $_REQUEST["username"]);
   $password=mysqli_real_escape_string($con, md5($_REQUEST["userpassword"]));
 
-   $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username) VALUES ('$name' ,'$email', '$phone','$gender','$username')";
-if(mysqli_query($con, $sql)){
-    echo "Records added successfully.";
-} else{
-    echo "ERROR: Unable to execute".  $sql ." ". mysqli_error($con);
-}
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  echo "<script>alert('Email entered Invalid')</script>";
+  }
 
-  $sql2 = "INSERT INTO yav_users (user_id,username,userpassword) VALUES (10,'$username','$password')";
-  if(mysqli_query($con, $sql2)){
-      echo "Records added successfully.";
-  } else{
-      echo "ERROR: Unable to execute". $sql2 ." ". mysqli_error($con);
+  else{
+
+ $method="signup";
+  $sql = "INSERT INTO yav_info ( fullname,email,phone,gender,username,userpassword) VALUES ('$name' ,'$email','$phone' ,'$gender','$username' , '$password')";
+if(mysqli_query($con, $sql))
+ header("profile.php");
+
   }
-      
-  }
+
+ }
+ }
+
 
 mysqli_close($con);
 ?>
- 
-    
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+   $("#txt_username").keyup(function(){
+
+      var username = $(this).val().trim();
+
+      if(username != ''){
+
+         $.ajax({
+            url: 'ajaxfile.php',
+            type: 'post',
+            data: {username: username},
+            success: function(response){
+
+                $('#uname_response').html(response);
+
+             }
+         });
+      }else{
+         $("#uname_response").html("");
+      }
+
+    });
+
+ });
+
+</script>
+
+
 
 <?php
 echo "<h2>Your Input:</h2>";
